@@ -76,6 +76,11 @@ PhysiCore addresses this challenge by creating a lightweight Physical AI platfor
 ---
 
 ## Project Architecture
+![Architecture]
+<p align="center">
+  <img src="Block_Diagrams/Block_diagram.png" alt="Block Diagram" width="700">
+</p>
+
 
 ```text
 Physical Asset

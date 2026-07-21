@@ -1,17 +1,25 @@
 # Documentation
 
-This folder contains all project documentation.
+This directory contains all technical documentation for the PhysiCore project.
 
-## Contents
+## Documents
 
-- Problem Statement
-- Block Diagrams
-- Research Papers
-- Design Documents
-- Final Report
-- Presentation (PPT)
-- User Manual
+| Document | Description |
+|----------|-------------|
+| Problem_Statement.md | Project overview, objectives, and motivation |
+| System_Architecture.md | Overall architecture of the system |
+| Hardware_Design.md | Hardware components and connections |
+| Software_Design.md | Firmware and software architecture |
+| Signal_Processing.md | Signal acquisition and processing pipeline |
+| TinyML_Pipeline.md | AI model training and deployment |
+| Testing.md | Testing procedures and results |
+| User_Manual.md | Installation and operating guide |
+| Final_Report.md | Complete project report |
 
-## Purpose
+## Diagrams
 
-Maintain all technical and project documentation in one place.
+The **Block_Diagrams** folder contains all architecture and workflow diagrams.
+
+## References
+
+The **Research** folder contains research papers and technical references used during development.

@@ -157,10 +157,10 @@ PhysiCore/
 
 - [x] Project Planning
 - [x] Repository Setup
-- [ ] Hardware Integration
-- [ ] Dataset Collection
+- [x] Hardware Integration
+- [x] Dataset Collection
 - [ ] TinyML Development
-- [ ] Testing
+- [x] Testing
 - [ ] Competition Submission
 
 ---

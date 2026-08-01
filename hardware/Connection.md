@@ -7,7 +7,7 @@ This document describes the hardware connections used in the **PhysiCore** proje
 | Component | Interface | Purpose |
 |----------|-----------|---------|
 | Arduino UNO Q | Main Controller | Edge AI Processing |
-| INMP441 | I2S | Audio Acquisition |
+| IMAX9814 | Analog | Audio Acquisition |
 | Piezo Sensor | Analog | Vibration Detection |
 | MPU6050 | I2C | Motion Sensing |
 | Status LEDs | GPIO | System Status |

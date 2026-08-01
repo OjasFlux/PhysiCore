@@ -39,16 +39,13 @@ This document describes the hardware connections used in the **PhysiCore** proje
 
 # Connection Table
 
-## INMP441 Digital Microphone
+## IMAX9814 Microphone
 
-| INMP441 Pin | Arduino UNO Q |
+| IMAX9814 Pin | Arduino UNO Q |
 |-------------|---------------|
 | VDD | 3.3V |
 | GND | GND |
-| WS | I2S Word Select |
-| SCK | I2S Bit Clock |
-| SD | I2S Data |
-| L/R | GND (Left Channel) |
+| OUT | A0 |
 
 ---
 

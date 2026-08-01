@@ -97,7 +97,7 @@ Use a **220 Ω resistor** in series with each LED.
 | Device | Supply Voltage |
 |----------|---------------|
 | Arduino UNO Q | USB-C |
-| INMP441 | 3.3V |
+| IMAX9814 | 3.3V |
 | MPU6050 | 3.3V |
 | Piezo | Passive Sensor |
 
@@ -107,7 +107,7 @@ Use a **220 Ω resistor** in series with each LED.
 
 | Interface | Device |
 |-----------|--------|
-| I2S | INMP441 |
+| Analog | IMAX9814 |
 | I2C | MPU6050 |
 | Analog ADC | Piezo Sensor |
 | GPIO | LEDs |

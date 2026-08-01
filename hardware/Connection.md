@@ -21,18 +21,18 @@ This document describes the hardware connections used in the **PhysiCore** proje
                       │
                  Tap / Impact
                       │
-      ┌──────────┬───────────┬───────────┐
-      │          │           │
-  INMP441     Piezo      MPU6050
- (Audio)   (Vibration)   (Motion)
-      │          │           │
-      └──────────┼───────────┘
-                 │
-          Arduino UNO Q
-                 │
-      Signal Processing & TinyML
-                 │
-       Material Classification
+           ┌──────────┬───────────┬
+           │          │           │
+        IMAX9814     Piezo      MPU6050
+       (Audio)   (Vibration)   (Motion)
+            │          │           │
+            └──────────┼───────────┘
+                       │
+                Arduino UNO Q
+                       │
+            Signal Processing & TinyML
+                       │
+             Material Classification
 ```
 
 ---

@@ -25,7 +25,7 @@ The objective is to classify machine conditions into four categories:
 | Item | Details |
 |------|---------|
 | Sensor | Piezo Vibration Sensor |
-| Microcontroller | Arduino Nano |
+| Microcontroller | Arduino UNO Q|
 | Sampling Interval | 20 ms |
 | Sampling Rate | ~50 Hz |
 | Output | Analog Value (0–1023) |

@@ -14,7 +14,7 @@ This folder contains all hardware-related files.
 ## Components
 
 - Arduino UNO Q
-- INMP441 Microphone
+- IMAX9814 Microphone
 - Piezo Vibration Sensor
 - MPU6050 IMU
 

@@ -194,16 +194,16 @@ severe_fault_001.csv
 
 Before approving a dataset, verify the following:
 
-- [ ] Correct folder
-- [ ] Correct filename
-- [ ] CSV opens successfully
-- [ ] Header is correct
-- [ ] No empty rows
-- [ ] No missing values
-- [ ] Time values increase correctly
-- [ ] Event present in the recording
-- [ ] Event near the middle
-- [ ] Recording duration approximately 10–15 seconds
+- [ x] Correct folder
+- [ x] Correct filename
+- [ x] CSV opens successfully
+- [ x] Header is correct
+- [ x] No empty rows
+- [x ] No missing values
+- [x ] Time values increase correctly
+- [ x] Event present in the recording
+- [ x] Event near the middle
+- [ x] Recording duration approximately 10–15 seconds
 
 ---
 

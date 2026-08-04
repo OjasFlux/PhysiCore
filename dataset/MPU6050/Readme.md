@@ -212,16 +212,16 @@ severe_fault_001.csv
 
 Before approving any dataset, verify the following:
 
-- [ ] Correct folder
-- [ ] Correct filename
-- [ ] CSV file opens correctly
-- [ ] Header is correct
-- [ ] Seven columns are present
-- [ ] No empty rows
-- [ ] No missing values
-- [ ] Time values increase correctly
-- [ ] Sensor orientation remained unchanged
-- [ ] Event occurs near the middle
+- [ x] Correct folder
+- [x ] Correct filename
+- [ x] CSV file opens correctly
+- [x ] Header is correct
+- [x ] Seven columns are present
+- [x] No empty rows
+- [ x] No missing values
+- [ x] Time values increase correctly
+- [ x] Sensor orientation remained unchanged
+- [x] Event occurs near the middle
 - [ ] Recording duration approximately 10–15 seconds
 
 ---

@@ -141,15 +141,14 @@ PhysiCore/
 10. Final Demonstration
 
 ---
+## 👥 Team
 
-## Team
-
-| Role | Responsibility |
-|------|----------------|
-| Team Leader | Project Management & System Integration |
-| Hardware Engineer | Sensor Integration |
-| Dataset Engineer | Dataset Collection & Labeling |
-| AI Engineer | TinyML Development |
+| Role | Member | Responsibility |
+|------|--------|----------------|
+| Team Leader | [@SUJAN](https://github.com/OjasFlux) | Project Management & System Integration |
+| Hardware Engineer | [@PRAJWAL](https://github.com/prajwalchitte46) | Sensor Integration |
+| Dataset Engineer | [@NITHIN](https://github.com/1nithinn) | Dataset Collection & Labeling |
+| AI Engineer | [@MANISH](https://github.com/ManishtnS18) | TinyML Development |
 
 ---
 

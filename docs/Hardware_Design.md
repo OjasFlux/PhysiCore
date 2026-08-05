@@ -3,7 +3,7 @@
 ## Components
 
 - Arduino UNO Q
-- INMAX441 Microphone
+- MAX9814 Microphone
 - Piezo Sensor
 - MPU6050 IMU
 

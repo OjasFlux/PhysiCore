@@ -50,9 +50,10 @@ Verify that the MPU6050 accelerometer and gyroscope are functioning correctly wi
 1. Connect the MPU6050 according to the wiring table.
 2. Upload the MPU6050 test program.
 3. Open the Serial Monitor.
-4. Set the baud rate to **115200**.
-5. Observe acceleration and gyroscope values.
-6. Move and rotate the sensor in different directions.
+4. If COM port is change verify and change COM in mpu_logger.py program eg.COM4
+5. Set the baud rate to **115200**.
+6. Observe acceleration and gyroscope values.
+7. Move and rotate the sensor in different directions.
 
 ---
 

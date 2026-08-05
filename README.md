@@ -55,7 +55,7 @@ PhysiCore addresses this challenge by creating a lightweight Physical AI platfor
 ## Hardware
 
 - Arduino UNO Q
-- INMP441 Digital Microphone
+- MAX9814  Digital Microphone
 - Piezo Vibration Sensor
 - MPU6050 IMU
 - Breadboard

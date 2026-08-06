@@ -204,17 +204,16 @@ severe_fault_001.csv
 # Dataset Verification Checklist
 
 Before approving any dataset, verify the following:
-
-- [x] Correct folder
-- [x] Correct filename
-- [x] CSV opens correctly
-- [x] Header is correct
-- [x] No empty rows
-- [x] No missing values
-- [x] Time values increase correctly
-- [x] Event occurs near the middle
-- [x] Recording duration approximately 10–15 seconds
-- [x] Microphone values change during the event
+- [ ] Correct folder
+- [ ] Correct filename
+- [ ] CSV opens correctly
+- [ ] Header is correct
+- [ ] No empty rows
+- [ ] No missing values
+- [ ] Time values increase correctly
+- [ ] Event occurs near the middle
+- [ ] Recording duration approximately 10–15 seconds
+- [ ] Microphone values change during the event
 
 ---
 

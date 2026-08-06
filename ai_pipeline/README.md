@@ -1,21 +1,84 @@
-# AI Model
+# AI Pipeline
 
-This folder contains machine learning development files.
+## Overview
 
-## Contents
+This directory contains the complete Artificial Intelligence workflow for the PhysiCore project.
 
-- Training Scripts
-- Feature Extraction
-- Trained Models
-- TensorFlow Lite Models
-- Evaluation Results
+The pipeline transforms raw sensor data into a trained TinyML model capable of detecting machine operating conditions and mechanical faults.
 
-## Framework
+---
 
-- TensorFlow
-- TensorFlow Lite
-- TinyML
+# Pipeline Workflow
 
-## Purpose
+```
+Raw Dataset
+      │
+      ▼
+Data Preprocessing
+      │
+      ▼
+Data Visualization
+      │
+      ▼
+Feature Engineering
+      │
+      ▼
+Model Training
+      │
+      ▼
+Model Evaluation
+      │
+      ▼
+TinyML Conversion
+      │
+      ▼
+Real-Time Inference
+```
 
-Develop and optimize the Physical Intelligence AI model.
+---
+
+# Directory Structure
+
+```
+ai_pipeline/
+├── preprocessing/
+├── visualization/
+├── feature_engineering/
+├── training/
+├── evaluation/
+├── tinyml/
+├── inference/
+├── notebooks/
+├── models/
+└── README.md
+```
+
+---
+
+# Pipeline Stages
+
+| Stage | Description |
+|--------|-------------|
+| Preprocessing | Clean and prepare raw datasets |
+| Visualization | Plot and inspect sensor data |
+| Feature Engineering | Extract meaningful numerical features |
+| Training | Train machine learning models |
+| Evaluation | Evaluate model performance |
+| TinyML | Convert model for embedded deployment |
+| Inference | Real-time prediction on Arduino UNO Q |
+
+---
+
+# Sensors Used
+
+- Piezo Sensor
+- MPU6050
+- MAX9814 Microphone
+
+---
+
+# Project
+
+PhysiCore
+
+AI-Based Intelligent Machine Fault Detection System

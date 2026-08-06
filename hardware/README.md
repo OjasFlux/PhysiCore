@@ -8,7 +8,6 @@ This folder contains all hardware-related files.
 - Wiring Connections
 - Bill of Materials (BOM)
 - Sensor Datasheets
-- PCB Design Files
 - Hardware Images
 
 ## Components

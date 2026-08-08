@@ -20,11 +20,13 @@ import pandas as pd
 # INPUT / OUTPUT PATHS
 # =====================================================
 
-INPUT_FILE = r"dataset/Piezo_sensor/Normal/Normal_001.csv"
+filename = input("Enter CSV filename (e.g. Normal_001.csv): ")
+
+INPUT_FILE = rf"dataset/Piezo_sensor/Normal/{filename}"
 
 OUTPUT_FOLDER = r"processed_dataset/Piezo_sensor/Normal"
 
-OUTPUT_FILE = os.path.join(OUTPUT_FOLDER, "Normal_001.csv")
+OUTPUT_FILE = os.path.join(OUTPUT_FOLDER, filename)
 
 # Create output folder if it doesn't exist
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)

@@ -1,20 +1,12 @@
-# TinyML Conversion
+# TinyML Deployment
 
-## Objective
+This directory contains the files and documentation required to deploy the trained PhysiCore fault-detection model on an edge device.
 
-Convert trained AI models into TinyML-compatible formats for deployment on embedded hardware.
+## Current Model
 
----
+The current baseline model is a Random Forest classifier trained using Piezo sensor features.
 
-## Tasks
+Model file:
 
-- TensorFlow Lite conversion
-- Model optimization
-- Quantization
-- C array generation
-
----
-
-## Target Hardware
-
-- Arduino UNO Q
+```text
+ai_pipeline/models/piezo_random_forest.pkl

@@ -1,142 +1,160 @@
-TINYML DEPLOYMENT
+# TinyML Deployment
 
-This directory contains the resources and implementation files required
-to deploy the trained PhysiCore machine-fault detection model on an
-edge device.
+This directory contains the resources, implementation files, and documentation required to deploy the trained **PhysiCore machine-fault detection model** on an edge device.
 
+---
 
-PURPOSE
+## 🎯 Purpose
 
-The objective of the TinyML stage is to move the trained machine-fault
-classification system from a PC-based environment to a resource-
-constrained embedded device.
+The purpose of the TinyML stage is to move the trained machine-fault detection system from a PC-based environment to a resource-constrained embedded device.
 
+The final system should perform sensor processing, feature extraction, and fault classification locally on the edge device.
 
-TINYML PIPELINE
+---
 
+## 🔄 TinyML Pipeline
+
+```text
 Piezo Sensor
-     |
-     v
+     │
+     ▼
 Data Acquisition
-     |
-     v
+     │
+     ▼
 Preprocessing
-     |
-     v
+     │
+     ▼
 Windowing
-     |
-     v
+     │
+     ▼
 Feature Extraction
-     |
-     v
+     │
+     ▼
 TinyML Model
-     |
-     v
+     │
+     ▼
 Fault Classification
+```
 
+---
 
-CURRENT MODEL
+## 🤖 Current Model
 
-The current baseline model is a Random Forest classifier trained using
-features extracted from the Piezo sensor.
+The current baseline model is a **Random Forest classifier** trained using features extracted from the Piezo sensor.
 
-Model:
+### Model File
 
+```text
 ai_pipeline/models/piezo_random_forest.pkl
+```
 
-The current model is a PC-side model and has not yet been converted
-for embedded deployment.
+The current model is a PC-side machine-learning model and has not yet been converted for embedded deployment.
 
+---
 
-INPUT FEATURES
+## 📊 Input Features
 
-The model uses the following features:
+The model currently uses the following features extracted from each Piezo data window:
 
-1. Mean
-2. Standard Deviation
-3. Variance
-4. RMS
-5. Maximum
-6. Minimum
-7. Peak-to-Peak
-8. Dominant Frequency
-9. Spectral Energy
+| Feature | Description |
+|---|---|
+| `Mean` | Mean value of the Piezo signal |
+| `Std` | Standard deviation of the Piezo signal |
+| `Variance` | Variance of the Piezo signal |
+| `RMS` | Root Mean Square of the signal |
+| `Maximum` | Maximum signal value |
+| `Minimum` | Minimum signal value |
+| `Peak_to_Peak` | Difference between maximum and minimum values |
+| `Dominant_Frequency` | Dominant frequency obtained from FFT |
+| `Spectral_Energy` | Energy calculated from the frequency-domain signal |
 
+---
 
-OUTPUT CLASSES
+## 🏷️ Output Classes
 
-The classifier identifies four machine conditions:
+The classifier identifies four machine-condition classes.
 
-0 - Normal
-1 - Minor Fault
-2 - Moderate Fault
-3 - Severe Fault
+| Class ID | Condition |
+|---:|---|
+| `0` | Normal |
+| `1` | Minor Fault |
+| `2` | Moderate Fault |
+| `3` | Severe Fault |
 
+---
 
-COMPLETE AI PIPELINE
+## 🔬 Complete AI Pipeline
 
+```text
 Raw Sensor Data
-      |
-      v
+      │
+      ▼
 Preprocessing
-      |
-      v
+      │
+      ▼
 Visualization
-      |
-      v
+      │
+      ▼
 Windowing
-      |
-      v
+      │
+      ▼
 Feature Engineering
-      |
-      v
+      │
+      ▼
 Dataset Preparation
-      |
-      v
+      │
+      ▼
 Train / Validation / Test Split
-      |
-      v
+      │
+      ▼
 Model Training
-      |
-      v
+      │
+      ▼
 Model Evaluation
-      |
-      v
+      │
+      ▼
 Inference
-      |
-      v
+      │
+      ▼
 TinyML Deployment
+```
 
+---
 
-TARGET DEPLOYMENT PIPELINE
+## ⚙️ Target Embedded Pipeline
 
+The final embedded system is intended to perform the following operations locally:
+
+```text
 Piezo Sensor
-      |
-      v
+      │
+      ▼
 Sampling
-      |
-      v
+      │
+      ▼
 Preprocessing
-      |
-      v
+      │
+      ▼
 Windowing
-      |
-      v
+      │
+      ▼
 Feature Extraction
-      |
-      v
+      │
+      ▼
 TinyML Model
-      |
-      v
+      │
+      ▼
 Prediction
-      |
-      v
+      │
+      ▼
 Normal / Minor / Moderate / Severe
+```
 
+---
 
-DEPLOYMENT REQUIREMENTS
+## 📥 Deployment Requirements
 
-The following requirements must be evaluated before deployment:
+Before deployment, the following requirements must be evaluated:
 
 - Model size
 - RAM usage
@@ -146,105 +164,259 @@ The following requirements must be evaluated before deployment:
 - Sensor sampling requirements
 - Embedded processor capability
 - Real-time prediction performance
+- Memory requirements
+- Power requirements
+- Real-time processing capability
 
+---
 
-MODEL CONVERSION
+## 🔄 Model Conversion
 
-The current model:
+The current model is stored as:
 
+```text
 piezo_random_forest.pkl
+```
 
-is intended for PC-based inference.
+This model is intended for PC-based inference.
 
-It cannot be directly uploaded to a microcontroller as a TinyML
-model.
+The `.pkl` model cannot be directly uploaded to a microcontroller as a TinyML model.
 
-The deployment process must therefore determine a suitable embedded
-representation or select a lightweight model architecture suitable
-for the target hardware.
+The deployment stage must therefore determine a suitable embedded representation or select a lightweight model architecture suitable for the target hardware.
 
+The converted model must maintain the same input feature order and feature-calculation method used during training.
 
-HARDWARE DEPLOYMENT
+---
 
-The final TinyML implementation will run on an embedded device
-connected to the Piezo sensor.
+## 🔧 Hardware Deployment
 
-Piezo Sensor
-     |
-     v
-Microcontroller
-     |
-     v
-Feature Extraction
-     |
-     v
-TinyML Model
-     |
-     v
-Fault Prediction
+The final TinyML implementation will operate on an embedded device connected to the Piezo sensor.
 
+```text
+┌─────────────────┐
+│   Piezo Sensor  │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Microcontroller │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Preprocessing   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Feature         │
+│ Extraction      │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ TinyML Model    │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Fault Prediction│
+└─────────────────┘
+```
 
-REAL-TIME PREDICTION
+---
 
-The final system should process new sensor windows and produce a
-machine-condition prediction without requiring a PC.
+## 🧠 Real-Time Prediction
+
+The final system should process new sensor data and produce a machine-condition prediction without requiring a PC.
 
 Example:
 
-New Piezo Window
-      |
-      v
+```text
+New Piezo Data
+      │
+      ▼
+Preprocessing
+      │
+      ▼
+Windowing
+      │
+      ▼
 Feature Extraction
-      |
-      v
+      │
+      ▼
 Model Inference
-      |
-      v
-Prediction: Moderate Fault
+      │
+      ▼
+Prediction
+      │
+      ▼
+Moderate Fault
+```
 
+---
 
-CURRENT STATUS
+## 🔁 Training vs Deployment
 
-Data Collection              COMPLETED
-Preprocessing                COMPLETED
-Visualization                COMPLETED
-Windowing                    COMPLETED
-Feature Extraction           COMPLETED
-Dataset Preparation           COMPLETED
-Dataset Splitting             COMPLETED
-Model Training                COMPLETED
-Model Evaluation              COMPLETED
-PC Inference                  COMPLETED
-TinyML Model Selection        PENDING
-Model Conversion              PENDING
-Embedded Implementation       PENDING
-Hardware Testing              PENDING
-Real-Time Fault Detection     PENDING
+The processing performed during deployment must remain consistent with the processing used during model training.
 
+```text
+Training
 
-IMPORTANT NOTE
+Raw Data
+   ↓
+Preprocessing
+   ↓
+Windowing
+   ↓
+Feature Extraction
+   ↓
+Model Training
+```
 
-The preprocessing, windowing, and feature-extraction operations used
-during deployment must remain consistent with the operations used
-during model training.
+```text
+Deployment
 
-Any difference between training-time and deployment-time feature
-calculations can result in incorrect model predictions.
+New Raw Data
+   ↓
+Same Preprocessing
+   ↓
+Same Windowing
+   ↓
+Same Feature Extraction
+   ↓
+Model Inference
+```
 
+Any difference between training-time and deployment-time processing can result in incorrect predictions.
 
-DIRECTORY STRUCTURE
+---
 
+## 📈 Model Performance
+
+The trained model is evaluated using a separate test dataset that is not used during model training.
+
+The evaluation stage measures:
+
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion Matrix
+- Per-class performance
+
+The evaluation results are available in:
+
+```text
+ai_pipeline/evaluation/
+```
+
+---
+
+## 📁 Directory Structure
+
+```text
 tinyml/
-|
-|-- README.md
-|
-|-- conversion/
-|
-|-- embedded/
-|
-`-- tests/
+│
+├── README.md
+│
+├── conversion/
+│
+├── embedded/
+│
+└── tests/
+```
 
+### Directory Description
 
-The subdirectories will contain model-conversion files, embedded
-implementation files, and deployment-testing files as the TinyML
-stage progresses.
+| Directory | Purpose |
+|---|---|
+| `conversion/` | Model conversion and optimization files |
+| `embedded/` | Embedded/TinyML implementation |
+| `tests/` | Embedded deployment and hardware testing |
+
+---
+
+## 🚧 Current Status
+
+| Stage | Status |
+|---|---|
+| Data Collection | ✅ Completed |
+| Preprocessing | ✅ Completed |
+| Visualization | ✅ Completed |
+| Windowing | ✅ Completed |
+| Feature Extraction | ✅ Completed |
+| Dataset Preparation | ✅ Completed |
+| Dataset Splitting | ✅ Completed |
+| Model Training | ✅ Completed |
+| Model Evaluation | ✅ Completed |
+| PC Inference | ✅ Completed |
+| TinyML Model Selection | ⏳ Pending |
+| Model Conversion | ⏳ Pending |
+| Model Optimization | ⏳ Pending |
+| Embedded Implementation | ⏳ Pending |
+| Hardware Testing | ⏳ Pending |
+| Real-Time Fault Detection | ⏳ Pending |
+
+---
+
+## 🚀 Deployment Roadmap
+
+```text
+Trained Model
+      │
+      ▼
+Model Analysis
+      │
+      ▼
+Model Selection
+      │
+      ▼
+Model Conversion
+      │
+      ▼
+Model Optimization
+      │
+      ▼
+Embedded Implementation
+      │
+      ▼
+Hardware Testing
+      │
+      ▼
+Real-Time Inference
+      │
+      ▼
+Fault Detection System
+```
+
+---
+
+## ⚠️ Important Notes
+
+1. The TinyML model must use the same feature definitions used during training.
+
+2. The order of input features must remain unchanged between training and deployment.
+
+3. The preprocessing and windowing parameters must remain consistent.
+
+4. The PC model should be validated before deployment to embedded hardware.
+
+5. Memory usage and inference time must be checked before selecting the final embedded model.
+
+6. The final embedded implementation must be tested using real sensor data.
+
+---
+
+## 🎯 Final Objective
+
+The final TinyML system should be capable of receiving real-time Piezo sensor data and locally classifying the machine condition as:
+
+```text
+Normal
+Minor Fault
+Moderate Fault
+Severe Fault
+```
+
+without requiring continuous PC-based machine-learning inference.

@@ -1,86 +1,72 @@
-# TinyML Deployment
+# Training Pipeline
 
-Contains model analysis, conversion, embedded implementation, and testing resources for edge deployment.
+Contains dataset preparation, dataset splitting, and model-training resources.
 
-## Pipeline
-
-```text
-Piezo Sensor
-    ↓
-Sampling
-    ↓
-Preprocessing
-    ↓
-Windowing
-    ↓
-Feature Extraction
-    ↓
-TinyML Model
-    ↓
-Fault Classification
-```
-
-## Selected Candidate
+## Workflow
 
 ```text
-ai_pipeline/models/piezo_decision_tree.pkl
+Feature Dataset
+    ↓
+Dataset Preparation
+    ↓
+Train / Validation / Test Split
+    ↓
+Model Training
+    ↓
+Validation
 ```
 
-Characteristics:
+## Dataset Preparation
+
+Script:
 
 ```text
-Tree depth : 4
-Leaves     : 6
-Test accuracy : 99.57%
+prepare_piezo_dataset.py
 ```
 
-## Converted Model
+Label mapping:
+
+| Class | ID |
+|---|---:|
+| Normal | 0 |
+| Minor_Fault | 1 |
+| Moderate_Fault | 2 |
+| Severe_Fault | 3 |
+
+## Dataset Split
+
+Script:
 
 ```text
-ai_pipeline/tinyml/conversion/piezo_decision_tree.h
+split_piezo_dataset.py
 ```
 
-Conversion verification passed and the generated tree logic matches the scikit-learn model.
+Current split:
 
-## Features
+```text
+Training   : 70%
+Validation : 15%
+Testing    : 15%
+```
 
-- Mean
-- Std
-- Variance
-- RMS
-- Maximum
-- Minimum
-- Peak_to_Peak
-- Dominant_Frequency
-- Spectral_Energy
+Output:
 
-## Classes
-
-| ID | Condition |
-|---:|---|
-| 0 | Normal |
-| 1 | Minor Fault |
-| 2 | Moderate Fault |
-| 3 | Severe Fault |
+```text
+dataset_split/
+├── X_train.csv
+├── X_validation.csv
+├── X_test.csv
+├── y_train.csv
+├── y_validation.csv
+└── y_test.csv
+```
 
 ## Status
 
-- [x] TinyML candidate selected
-- [x] Decision Tree trained
-- [x] Decision Tree evaluated
-- [x] Model converted to C/C++
-- [x] Conversion verified
-- [ ] Embedded feature extraction
-- [ ] Embedded inference
-- [ ] Hardware testing
-- [ ] Real-time fault detection
-
-## Structure
-
-```text
-tinyml/
-├── README.md
-├── conversion/
-├── embedded/
-└── tests/
-```
+- [x] Feature dataset prepared
+- [x] Labels encoded
+- [x] Train/validation/test split
+- [x] Random Forest training
+- [x] Decision Tree training
+- [x] Validation
+- [x] Test dataset prepared

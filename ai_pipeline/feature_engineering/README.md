@@ -1,39 +1,49 @@
 # Feature Engineering
 
-## Objective
+Converts fixed-size sensor windows into numerical features for machine learning.
 
-Extract meaningful numerical features from sensor signals.
+## Workflow
 
----
+```text
+Windowed Sensor Data
+    ↓
+Time-Domain Features
+    ↓
+Frequency-Domain Features
+    ↓
+Feature Vector
+    ↓
+ML Dataset
+```
 
-## Features
-
-### Piezo
+## Piezo Features
 
 - Mean
+- Standard deviation
+- Variance
+- RMS
 - Maximum
 - Minimum
-- RMS
-- Energy
-- Variance
+- Peak-to-Peak
+- Dominant Frequency
+- Spectral Energy
 
-### MPU6050
+## Main Script
 
-- Mean
-- Standard Deviation
-- RMS
-- Peak Acceleration
-- Peak Angular Velocity
+```text
+extract_piezo_features.py
+```
 
-### Microphone
+Output:
 
-- RMS
-- Peak Amplitude
-- Zero Crossing Rate
-- Signal Energy
+```text
+piezo_features.csv
+```
 
----
+## Status
 
-## Output
+- [x] Piezo feature extraction
+- [ ] MPU6050 feature extraction
+- [ ] Microphone feature extraction
 
-Feature vectors used for AI training.
+The microphone/INMP441 path is currently pending.

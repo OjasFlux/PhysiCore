@@ -8,7 +8,6 @@ float signal[WINDOW_SIZE];
 float features[9];
 
 int sampleCount = 0;
-bool readyForData = false;
 
 void setup() {
 
@@ -17,12 +16,7 @@ void setup() {
   delay(1000);
 
   Serial.println("UNO Q FEATURE VERIFICATION");
-  Serial.println("Send 100 Piezo samples, one per line.");
-  Serial.println("Format: one integer per line");
-  Serial.println();
-
-  sampleCount = 0;
-  readyForData = true;
+  Serial.println("Ready for 100 samples");
 }
 
 void calculateFeatures() {
@@ -32,10 +26,6 @@ void calculateFeatures() {
 
   float minimum = signal[0];
   float maximum = signal[0];
-
-  // -----------------------------
-  // Mean / RMS / Min / Max
-  // -----------------------------
 
   for (int i = 0; i < WINDOW_SIZE; i++) {
 
@@ -54,10 +44,6 @@ void calculateFeatures() {
   }
 
   float mean = sum / WINDOW_SIZE;
-
-  // -----------------------------
-  // Variance / Std
-  // -----------------------------
 
   float varianceSum = 0.0;
 
@@ -87,10 +73,6 @@ void calculateFeatures() {
   features[4] = maximum;
   features[5] = minimum;
   features[6] = peakToPeak;
-
-  // -----------------------------
-  // Frequency features
-  // -----------------------------
 
   float maxMagnitude = -1.0;
   float dominantFrequency = 0.0;
@@ -188,10 +170,6 @@ void printResults() {
 }
 
 void loop() {
-
-  if (!readyForData) {
-    return;
-  }
 
   if (Serial.available()) {
 

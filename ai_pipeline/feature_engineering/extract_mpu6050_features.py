@@ -1,61 +1,158 @@
-import os
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 
-# =========================================================
-# PATHS
-# =========================================================
+# =====================================================
+# MPU6050 FEATURE ENGINEERING
+#
+# Input:
+#   DataFrame containing 100 samples of:
+#   Ax, Ay, Az, Gx, Gy, Gz
+#
+# Output:
+#   Exactly 56 features
+#
+# 8 signals × 7 statistical features = 56
+# =====================================================
 
-INPUT_FOLDER = r"windowed_dataset\MPU6050"
 
-OUTPUT_FILE = (
-    r"ai_pipeline\feature_engineering"
-    r"\mpu6050_features.csv"
-)
+FEATURE_NAMES = []
 
 
-# =========================================================
-# FEATURE FUNCTION
-# =========================================================
+SIGNALS = [
+    "Ax",
+    "Ay",
+    "Az",
+    "Gx",
+    "Gy",
+    "Gz",
+    "AccelMag",
+    "GyroMag"
+]
 
-def extract_axis_features(signal):
-    signal = np.asarray(signal, dtype=float)
 
-    mean_value = np.mean(signal)
+STATISTICS = [
+    "Mean",
+    "Std",
+    "Variance",
+    "RMS",
+    "Maximum",
+    "Minimum",
+    "Peak_to_Peak"
+]
 
-    std_value = np.std(signal)
 
-    variance = np.var(signal)
+# Build feature names
+for signal in SIGNALS:
 
-    rms = np.sqrt(
-        np.mean(signal ** 2)
+    for statistic in STATISTICS:
+
+        FEATURE_NAMES.append(
+            f"{signal}_{statistic}"
+        )
+
+
+# Safety check
+if len(FEATURE_NAMES) != 56:
+
+    raise RuntimeError(
+        "MPU6050 feature list must contain exactly 56 features."
     )
 
-    maximum = np.max(signal)
 
-    minimum = np.min(signal)
+# =====================================================
+# EXTRACT 7 STATISTICAL FEATURES
+# =====================================================
 
-    peak_to_peak = maximum - minimum
+def extract_signal_features(
+    signal
+):
+    """
+    Extract seven statistical features from one signal.
 
-    return {
-        "Mean": mean_value,
-        "Std": std_value,
-        "Variance": variance,
-        "RMS": rms,
-        "Maximum": maximum,
-        "Minimum": minimum,
-        "Peak_to_Peak": peak_to_peak
-    }
+    Returns:
+        [
+            mean,
+            std,
+            variance,
+            rms,
+            maximum,
+            minimum,
+            peak_to_peak
+        ]
+    """
+
+    values = np.asarray(
+        signal,
+        dtype=np.float64
+    )
+
+    if values.size == 0:
+
+        raise ValueError(
+            "Signal is empty."
+        )
+
+    mean_value = np.mean(
+        values
+    )
+
+    std_value = np.std(
+        values,
+        ddof=0
+    )
+
+    variance_value = np.var(
+        values,
+        ddof=0
+    )
+
+    rms_value = np.sqrt(
+        np.mean(
+            values * values
+        )
+    )
+
+    maximum_value = np.max(
+        values
+    )
+
+    minimum_value = np.min(
+        values
+    )
+
+    peak_to_peak_value = (
+        maximum_value -
+        minimum_value
+    )
+
+    return [
+        mean_value,
+        std_value,
+        variance_value,
+        rms_value,
+        maximum_value,
+        minimum_value,
+        peak_to_peak_value
+    ]
 
 
-# =========================================================
-# PROCESS ONE MPU6050 WINDOW
-# =========================================================
+# =====================================================
+# VALIDATE INPUT
+# =====================================================
 
-def extract_features(file_path, label):
+def validate_mpu6050_dataframe(
+    df
+):
+    """
+    Validate an MPU6050 window.
 
-    df = pd.read_csv(file_path)
+    Required columns:
+        Ax, Ay, Az, Gx, Gy, Gz
+
+    Expected:
+        100 samples
+    """
 
     required_columns = [
         "Ax",
@@ -69,218 +166,241 @@ def extract_features(file_path, label):
     for column in required_columns:
 
         if column not in df.columns:
+
             raise ValueError(
-                f"Missing column '{column}' "
-                f"in {file_path}"
+                f"Missing required column: {column}"
             )
 
-    # -----------------------------------------------------
-    # Accelerometer features
-    # -----------------------------------------------------
+    if len(df) != 100:
 
-    ax_features = extract_axis_features(
-        df["Ax"].values
-    )
-
-    ay_features = extract_axis_features(
-        df["Ay"].values
-    )
-
-    az_features = extract_axis_features(
-        df["Az"].values
-    )
-
-    # -----------------------------------------------------
-    # Gyroscope features
-    # -----------------------------------------------------
-
-    gx_features = extract_axis_features(
-        df["Gx"].values
-    )
-
-    gy_features = extract_axis_features(
-        df["Gy"].values
-    )
-
-    gz_features = extract_axis_features(
-        df["Gz"].values
-    )
-
-    # -----------------------------------------------------
-    # Magnitudes
-    # -----------------------------------------------------
-
-    acceleration_magnitude = np.sqrt(
-        df["Ax"].values ** 2 +
-        df["Ay"].values ** 2 +
-        df["Az"].values ** 2
-    )
-
-    gyroscope_magnitude = np.sqrt(
-        df["Gx"].values ** 2 +
-        df["Gy"].values ** 2 +
-        df["Gz"].values ** 2
-    )
-
-    acceleration_mag_features = extract_axis_features(
-        acceleration_magnitude
-    )
-
-    gyroscope_mag_features = extract_axis_features(
-        gyroscope_magnitude
-    )
-
-    # -----------------------------------------------------
-    # Combine all features
-    # -----------------------------------------------------
-
-    features = {}
-
-    # Accelerometer
-    for name, value in ax_features.items():
-        features[f"Ax_{name}"] = value
-
-    for name, value in ay_features.items():
-        features[f"Ay_{name}"] = value
-
-    for name, value in az_features.items():
-        features[f"Az_{name}"] = value
-
-    # Gyroscope
-    for name, value in gx_features.items():
-        features[f"Gx_{name}"] = value
-
-    for name, value in gy_features.items():
-        features[f"Gy_{name}"] = value
-
-    for name, value in gz_features.items():
-        features[f"Gz_{name}"] = value
-
-    # Magnitudes
-    for name, value in acceleration_mag_features.items():
-        features[f"AccelMag_{name}"] = value
-
-    for name, value in gyroscope_mag_features.items():
-        features[f"GyroMag_{name}"] = value
-
-    # Label and file information
-    features["Label"] = label
-    features["File"] = os.path.basename(file_path)
-
-    return features
-
-
-# =========================================================
-# PROCESS DATASET
-# =========================================================
-
-all_features = []
-
-print("Starting MPU6050 feature extraction...\n")
-
-for label in os.listdir(INPUT_FOLDER):
-
-    label_folder = os.path.join(
-        INPUT_FOLDER,
-        label
-    )
-
-    if not os.path.isdir(label_folder):
-        continue
-
-    print("Processing:", label)
-
-    for filename in os.listdir(label_folder):
-
-        if not filename.lower().endswith(".csv"):
-            continue
-
-        file_path = os.path.join(
-            label_folder,
-            filename
+        raise ValueError(
+            "MPU6050 window must contain "
+            f"100 samples, found {len(df)}."
         )
 
-        try:
+    for column in required_columns:
 
-            features = extract_features(
-                file_path,
-                label
-            )
+        values = pd.to_numeric(
+            df[column],
+            errors="coerce"
+        )
 
-            all_features.append(features)
+        if values.isna().any():
 
-        except Exception as error:
-
-            print(
-                "Error processing",
-                filename,
-                ":",
-                error
+            raise ValueError(
+                f"Invalid numeric values found in {column}."
             )
 
 
-# =========================================================
-# CREATE DATAFRAME
-# =========================================================
+# =====================================================
+# MAIN FEATURE EXTRACTION
+# =====================================================
 
-if len(all_features) == 0:
+def extract_mpu6050_features(
+    df
+):
+    """
+    Extract exactly 56 MPU6050 features.
 
-    print("\nNo MPU6050 windows found.")
+    Feature order:
+
+    0-6:
+        Ax
+
+    7-13:
+        Ay
+
+    14-20:
+        Az
+
+    21-27:
+        Gx
+
+    28-34:
+        Gy
+
+    35-41:
+        Gz
+
+    42-48:
+        AccelMag
+
+    49-55:
+        GyroMag
+    """
+
+    validate_mpu6050_dataframe(
+        df
+    )
+
+
+    features = []
+
+
+    # =================================================
+    # SIX RAW AXES
+    # =================================================
+
+    raw_columns = [
+        "Ax",
+        "Ay",
+        "Az",
+        "Gx",
+        "Gy",
+        "Gz"
+    ]
+
+
+    for column in raw_columns:
+
+        values = pd.to_numeric(
+            df[column],
+            errors="raise"
+        ).to_numpy(
+            dtype=np.float64
+        )
+
+        features.extend(
+            extract_signal_features(
+                values
+            )
+        )
+
+
+    # =================================================
+    # ACCELERATION MAGNITUDE
+    #
+    # sqrt(Ax² + Ay² + Az²)
+    # =================================================
+
+    ax = df["Ax"].to_numpy(
+        dtype=np.float64
+    )
+
+    ay = df["Ay"].to_numpy(
+        dtype=np.float64
+    )
+
+    az = df["Az"].to_numpy(
+        dtype=np.float64
+    )
+
+
+    accel_magnitude = np.sqrt(
+        ax * ax +
+        ay * ay +
+        az * az
+    )
+
+
+    features.extend(
+        extract_signal_features(
+            accel_magnitude
+        )
+    )
+
+
+    # =================================================
+    # GYROSCOPE MAGNITUDE
+    #
+    # sqrt(Gx² + Gy² + Gz²)
+    # =================================================
+
+    gx = df["Gx"].to_numpy(
+        dtype=np.float64
+    )
+
+    gy = df["Gy"].to_numpy(
+        dtype=np.float64
+    )
+
+    gz = df["Gz"].to_numpy(
+        dtype=np.float64
+    )
+
+
+    gyro_magnitude = np.sqrt(
+        gx * gx +
+        gy * gy +
+        gz * gz
+    )
+
+
+    features.extend(
+        extract_signal_features(
+            gyro_magnitude
+        )
+    )
+
+
+    # =================================================
+    # FINAL CHECK
+    # =================================================
+
+    if len(features) != 56:
+
+        raise RuntimeError(
+            "Feature extraction returned "
+            f"{len(features)} features instead of 56."
+        )
+
+
+    return np.asarray(
+        features,
+        dtype=np.float64
+    )
+
+
+# =====================================================
+# RETURN NAMED FEATURES
+# =====================================================
+
+def extract_mpu6050_feature_dict(
+    df
+):
+    """
+    Return the 56 features as a dictionary.
+
+    Useful for:
+        debugging
+        visualization
+        CSV export
+        inspection
+    """
+
+    features = extract_mpu6050_features(
+        df
+    )
+
+    return dict(
+        zip(
+            FEATURE_NAMES,
+            features
+        )
+    )
+
+
+# =====================================================
+# TEST WHEN RUN DIRECTLY
+# =====================================================
+
+if __name__ == "__main__":
+
     print(
-        "Check this folder:",
-        INPUT_FOLDER
-    )
-
-else:
-
-    features_df = pd.DataFrame(
-        all_features
-    )
-
-    # -----------------------------------------------------
-    # Save
-    # -----------------------------------------------------
-
-    os.makedirs(
-        os.path.dirname(OUTPUT_FILE),
-        exist_ok=True
-    )
-
-    features_df.to_csv(
-        OUTPUT_FILE,
-        index=False
-    )
-
-    # -----------------------------------------------------
-    # Summary
-    # -----------------------------------------------------
-
-    print("\n======================================")
-    print("MPU6050 FEATURE EXTRACTION COMPLETED")
-    print("======================================")
-
-    print(
-        "Total windows:",
-        len(features_df)
+        "MPU6050 FEATURE ENGINEERING MODULE"
     )
 
     print(
-        "Total columns:",
-        len(features_df.columns)
+        "Feature count:",
+        len(FEATURE_NAMES)
     )
 
-    print("\nClass distribution:")
+    print()
 
-    print(
-        features_df["Label"].value_counts()
-    )
+    for index, name in enumerate(
+        FEATURE_NAMES
+    ):
 
-    print("\nFirst 5 rows:")
-
-    print(
-        features_df.head()
-    )
-
-    print("\nSaved to:")
-
-    print(OUTPUT_FILE)
+        print(
+            f"{index:02d}  {name}"
+        )

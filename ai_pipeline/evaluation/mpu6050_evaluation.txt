@@ -1,24 +1,23 @@
-PHYSICORE MPU6050 MODEL EVALUATION
-==================================
+PHYSICORE MPU6050 NEW DATASET RESULTS
+=====================================
 
-Test Samples: 76
-Test Accuracy: 100.00%
-
-Classification Report:
-
-                precision    recall  f1-score   support
-
-        Normal       1.00      1.00      1.00        14
-   Minor Fault       1.00      1.00      1.00        15
-Moderate Fault       1.00      1.00      1.00        14
-  Severe Fault       1.00      1.00      1.00        33
-
-      accuracy                           1.00        76
-     macro avg       1.00      1.00      1.00        76
-  weighted avg       1.00      1.00      1.00        76
+Total windows: 521
+Accuracy: 99.42%
 
 Confusion Matrix:
-[[14  0  0  0]
- [ 0 15  0  0]
- [ 0  0 14  0]
- [ 0  0  0 33]]
+[[213   1   0   0]
+ [  1 130   0   0]
+ [  0   0  60   0]
+ [  0   1   0 115]]
+
+Classification Report:
+                precision    recall  f1-score   support
+
+        Normal     0.9953    0.9953    0.9953       214
+   Minor Fault     0.9848    0.9924    0.9886       131
+Moderate Fault     1.0000    1.0000    1.0000        60
+  Severe Fault     1.0000    0.9914    0.9957       116
+
+      accuracy                         0.9942       521
+     macro avg     0.9950    0.9948    0.9949       521
+  weighted avg     0.9943    0.9942    0.9942       521

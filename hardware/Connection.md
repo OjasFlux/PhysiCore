@@ -7,7 +7,6 @@ This document describes the hardware connections used in the **PhysiCore** proje
 | Component | Interface | Purpose |
 |----------|-----------|---------|
 | Arduino UNO Q | Main Controller | Edge AI Processing |
-| IMAX9814 | Analog | Audio Acquisition |
 | Piezo Sensor | Analog | Vibration Detection |
 | MPU6050 | I2C | Motion Sensing |
 | Status LEDs | GPIO | System Status |
@@ -22,10 +21,10 @@ This document describes the hardware connections used in the **PhysiCore** proje
                  Tap / Impact
                       │
            ┌──────────┬───────────┬
-           │          │           │
-        IMAX9814     Piezo      MPU6050
-       (Audio)   (Vibration)   (Motion)
-            │          │           │
+           │                      │
+        Piezo                  MPU6050
+       (Vibration)             (Motion)
+            │                      │
             └──────────┼───────────┘
                        │
                 Arduino UNO Q
@@ -39,15 +38,6 @@ This document describes the hardware connections used in the **PhysiCore** proje
 
 # Connection Table
 
-## IMAX9814 Microphone
-
-| IMAX9814 Pin | Arduino UNO Q |
-|-------------|---------------|
-| VDD | 3.3V |
-| GND | GND |
-| OUT | A0 |
-
----
 
 ## Piezo Sensor
 
@@ -97,7 +87,6 @@ Use a **220 Ω resistor** in series with each LED.
 | Device | Supply Voltage |
 |----------|---------------|
 | Arduino UNO Q | USB-C |
-| IMAX9814 | 3.3V |
 | MPU6050 | 3.3V |
 | Piezo | Passive Sensor |
 
@@ -107,7 +96,6 @@ Use a **220 Ω resistor** in series with each LED.
 
 | Interface | Device |
 |-----------|--------|
-| Analog | IMAX9814 |
 | I2C | MPU6050 |
 | Analog ADC | Piezo Sensor |
 | GPIO | LEDs |

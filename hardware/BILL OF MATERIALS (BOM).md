@@ -7,7 +7,6 @@ This project aims to develop an Edge AI system capable of understanding physical
 | Component | Description | Quantity | Buying Links |
 | :--- | :--- | :---: | :--- |
 | **Arduino UNO Q** | Dual-brain AI development board with Linux & real-time control. | 1 | [Robu](https://robu.in/product/official-arduino-uno-q/) |
-| **MAX9814 Microphone** | Electret microphone module with Automatic Gain Control (AGC) for sound interactions. | 1 | [Flyrobo](https://www.flyrobo.in/max9814-high-performance-microphone-agc-amplifier-module) / [Techtonics](https://techtonics.in/product/max9814-high-performance-microphone-agc-amplifier-module/) |
 | **Piezo Vibration Sensor** | Sensor for detecting surface impacts, knocks, or physical vibrations. | 1 | [Techtonics](https://techtonics.in/product/piezo-vibration-sensor-large-with-mass/) / [Indian Hobby Center](https://www.indianhobbycenter.com/products/piezo-vibration-sensor) |
 | **MPU6050 IMU** | 6-axis Motion Tracking device (Accelerometer + Gyroscope) for gesture/movement tracking. | 1 | [Robu](https://robu.in) / [CircuitDigest Shop](https://circuitdigest.com/shop) |
 

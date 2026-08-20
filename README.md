@@ -55,7 +55,6 @@ PhysiCore addresses this challenge by creating a lightweight Physical AI platfor
 ## Hardware
 
 - Arduino UNO Q
-- MAX9814  Digital Microphone
 - Piezo Vibration Sensor
 - MPU6050 IMU
 - Breadboard
@@ -89,10 +88,10 @@ Physical Interaction
 (Tap / Impact)
         │
  ┌──────┼──────┐
- │      │      │
- ▼      ▼      ▼
-Microphone Piezo MPU6050
- │      │      │
+ │             │
+ ▼             ▼
+Piezo      MPU6050
+ │             │
  └──────┼──────┘
         │
 Arduino UNO Q
@@ -158,7 +157,7 @@ PhysiCore/
 - [x] Repository Setup
 - [x] Hardware Integration
 - [x] Dataset Collection
-- [ ] TinyML Development
+- [x] TinyML Development
 - [x] Testing
 - [ ] Competition Submission
 

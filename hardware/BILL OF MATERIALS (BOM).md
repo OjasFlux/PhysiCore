@@ -23,4 +23,4 @@ This project aims to develop an Edge AI system capable of understanding physical
 
 ## Project Notes
 * **Edge AI Constraint:** Since the system runs entirely on the Arduino UNO Q, configure your sensor sampling frequencies efficiently to fit within system memory constraints for any lightweight machine learning models (e.g., TinyML / TensorFlow Lite).
-* **Communication Protocols:** The MPU6050 communicates via I2C, the MAX9814 provides analog output signals, and the Piezo sensor can be read via analog pins or digital interrupt pins depending on your trigger configuration.
+* **Communication Protocols:** The MPU6050 communicates via I2C and the Piezo sensor can be read via analog pins or digital interrupt pins depending on your trigger configuration.

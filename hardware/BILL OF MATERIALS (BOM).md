@@ -7,8 +7,8 @@ This project aims to develop an Edge AI system capable of understanding physical
 | Component | Description | Quantity | Buying Links |
 | :--- | :--- | :---: | :--- |
 | **Arduino UNO Q** | Dual-brain AI development board with Linux & real-time control. | 1 | [Robu](https://robu.in/product/official-arduino-uno-q/) |
-| **Piezo Vibration Sensor** | Sensor for detecting surface impacts, knocks, or physical vibrations. | 1 | [Techtonics](https://techtonics.in/product/piezo-vibration-sensor-large-with-mass/) / [Indian Hobby Center](https://www.indianhobbycenter.com/products/piezo-vibration-sensor) |
-| **MPU6050 IMU** | 6-axis Motion Tracking device (Accelerometer + Gyroscope) for gesture/movement tracking. | 1 | [Robu](https://robu.in) / [CircuitDigest Shop](https://circuitdigest.com/shop) |
+| **Piezo Vibration Sensor** | Sensor for detecting surface impacts, knocks, or physical vibrations. | 1 | [Makerbazar](https://makerbazar.in/products/piezoelectric-vibration-sensor-module?variant=43956010746096)|
+| **MPU6050 IMU** | 6-axis Motion Tracking device (Accelerometer + Gyroscope) for gesture/movement tracking. | 1 | [Robu](https://robu.in/product/mpu-6050-gyro-sensor-2-accelerometer/) |
 
 ---
 

@@ -351,12 +351,12 @@ tinyml/
 | Model Training | ✅ Completed |
 | Model Evaluation | ✅ Completed |
 | PC Inference | ✅ Completed |
-| TinyML Model Selection | ⏳ Pending |
-| Model Conversion | ⏳ Pending |
-| Model Optimization | ⏳ Pending |
-| Embedded Implementation | ⏳ Pending |
-| Hardware Testing | ⏳ Pending |
-| Real-Time Fault Detection | ⏳ Pending |
+| TinyML Model Selection | ✅ Completed |
+| Model Conversion | ✅ Completed|
+| Model Optimization | ✅ Completed |
+| Embedded Implementation | ✅ Completed |
+| Hardware Testing | ✅ Completed|
+| Real-Time Fault Detection | ✅ Completed |
 
 ---
 

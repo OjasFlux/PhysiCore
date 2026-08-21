@@ -60,10 +60,6 @@ Failed files    : 0
 Total windows   : 501
 ```
 
-## Microphone
-
-MAX9814 collection is currently paused. The INMP441 + ESP32 + UNO Q hardware communication path has been verified, but the microphone dataset pipeline is pending.
-
 ## Important
 
 Do not remove valid sensor zero readings unless a verified data-quality rule requires it.
